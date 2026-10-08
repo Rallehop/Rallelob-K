@@ -67,51 +67,12 @@ end
 ----------------------------------------------------------
 ----------------------------------------------------------
 
-local function AnimationControl()
-
-	local current_tracks = 0
-	
-	while true do
-	
-		if moving or once then
-		
-			if current_tracks == 0 then
-			
-				Show(tracks1)
-				Hide(tracks4)
-				current_tracks = current_tracks + 1
-			elseif current_tracks == 1 then
-				
-				Show(tracks2)
-				Hide(tracks1)
-				current_tracks = current_tracks + 1
-			elseif current_tracks == 2 then
-			
-				Show(tracks3)
-				Hide(tracks2)
-				current_tracks = current_tracks + 1
-			elseif current_tracks == 3 then
-			
-				Show(tracks4)
-				Hide(tracks3)
-				current_tracks = 0
-			end
-			
-			once = false
-			
-		end
-		animCount = animCount + 1
-		Sleep(ANIM_SPEED)
-	end
-end
-
 function script.StartMoving()
 	StartThread(TrackControlStartMoving)
 	StartThread(TrackControlStartMoving)
 end
 
 function script.StopMoving()
-	moving = false
 	TrackControlStopMoving()
 end
 
@@ -230,16 +191,15 @@ function script.Create()
             small = {piece('wheels6',  'wheels7', 'wheels8')},
 		},
 		tracks = tracks,
-		signal = 2,
+		signal = SIG_TRACKS,
 		smallSpeed = math.rad(960),
 		smallAccel = math.rad(400),
 		smallDecel = math.rad(600),
 		largeSpeed = math.rad(600),
 		largeAccel = math.rad(200),
 		largeDecel = math.rad(300),
-		trackPeriod = 25,
+		trackPeriod = 40,
 	})
-	moving = false
 	
 	Turn(firepoint, x_axis, math.rad(7))
 	
