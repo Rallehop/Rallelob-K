@@ -2,6 +2,7 @@
 
 include "constants.lua"
 include "trackControl.lua"
+include "trackControl.lua"
 
 -- WARNING: change your constant for the -brackets to 65536 before compilingnot
 local base, body, turret, sleeve, barrel, firepoint, tracks1, tracks2, tracks3, tracks4,
@@ -67,6 +68,7 @@ end
 ----------------------------------------------------------
 
 function script.StartMoving()
+	StartThread(TrackControlStartMoving)
 	StartThread(TrackControlStartMoving)
 end
 
@@ -200,6 +202,7 @@ function script.Create()
 	})
 	
 	Turn(firepoint, x_axis, math.rad(7))
+	
 	
 	while select(5, Spring.GetUnitHealth(unitID)) < 1 do
 		Sleep(250)
